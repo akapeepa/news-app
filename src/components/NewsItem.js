@@ -17,7 +17,7 @@ export class NewsItem extends Component {
                             {source}
                         </span>
                     </div>
-                    <img src={imageUrl} className="card-img-top" alt="news Image" />
+                    <img src={!imageUrl?'https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg':imageUrl} className="card-img-top" alt="news" />
                     <div className="card-body">
                         <h5 className="card-title">{title}</h5>
                         <p className="card-text">{description}</p>
