@@ -5,12 +5,10 @@ import PropTypes from 'prop-types'
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 const News = (props) => {
-
     const [articles, setArticles] = useState([]);
     const [loading, setLoading] = useState(true);
     const [page, setPage] = useState(1);
     const [totalResults, setTotalResults] = useState(0);
-
 
     const updateNews = async () => {
         props.setProgress(10)
@@ -29,8 +27,8 @@ const News = (props) => {
 
     useEffect(() => {
         updateNews()
+        // eslint-disable-next-line
     }, []);
-
 
     // handleNext = async () => {
     //     setState({ page: state.page + 1 })
@@ -44,9 +42,9 @@ const News = (props) => {
     // }
 
     const fetchMoreData = async () => {
-        setPage(page + 1)
         // updateNews()
-        const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&pageSize=${props.pageSize}&page=${page}`
+        const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&pageSize=${props.pageSize}&page=${page + 1}`
+        setPage(page + 1)
         setLoading(false)
         let data = await fetch(url);
         let parsedData = await data.json();
@@ -57,7 +55,7 @@ const News = (props) => {
 
     return (
         <>
-            <h2 className='text-center my-3' >Top {props.category} Headlines</h2>
+            <h2 className='text-center my-3 t-90'>Top {props.category} Headlines</h2>
             {loading && <Spinner />}
             <InfiniteScroll
                 dataLength={articles.length}
